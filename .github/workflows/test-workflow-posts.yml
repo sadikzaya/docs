@@ -129,29 +129,27 @@ jobs:
           # Add your custom code processing here
           echo "code_result=processed" >> $GITHUB_OUTPUT
 
-      # Send email with results
+      # Send email with results (dummy step)
       - name: Send Email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: AI Subreddit Posts - Workflow Results
-          to: ${{ secrets.EMAIL_TO }}
-          from: GitHub Actions
-          body: |
-            Workflow completed successfully!
-
-            Subreddits processed:
-            - /r/ArtificialIntelligence: ${{ steps.fetch_ai.outputs.ai_posts }}
-            - /r/ChatGPT: ${{ steps.fetch_chatgpt.outputs.chatgpt_posts }}
-            - /r/artificial: ${{ steps.fetch_artificial.outputs.artificial_posts }}
-            - /r/Midjourney: ${{ steps.fetch_midjourney.outputs.midjourney_posts }}
-            - /r/StableDiffusion: ${{ steps.fetch_stablediffusion.outputs.stablediffusion_posts }}
-            - /r/singularity: ${{ steps.fetch_singularity.outputs.singularity_posts }}
-
-            Merged: ${{ steps.merge_posts.outputs.merged_posts }}
-            Formatted: ${{ steps.format_posts.outputs.formatted_posts }}
-            OpenAI: ${{ steps.openai_process.outputs.openai_result }}
-            Code: ${{ steps.code_process.outputs.code_result }}
+        run: |
+          echo "📧 Sending email notification..."
+          echo "----------------------------------------"
+          echo "Subject: AI Subreddit Posts - Workflow Results"
+          echo "To: recipient@example.com"
+          echo ""
+          echo "Workflow completed successfully!"
+          echo ""
+          echo "Subreddits processed:"
+          echo "- /r/ArtificialIntelligence: ${{ steps.fetch_ai.outputs.ai_posts }}"
+          echo "- /r/ChatGPT: ${{ steps.fetch_chatgpt.outputs.chatgpt_posts }}"
+          echo "- /r/artificial: ${{ steps.fetch_artificial.outputs.artificial_posts }}"
+          echo "- /r/Midjourney: ${{ steps.fetch_midjourney.outputs.midjourney_posts }}"
+          echo "- /r/StableDiffusion: ${{ steps.fetch_stablediffusion.outputs.stablediffusion_posts }}"
+          echo "- /r/singularity: ${{ steps.fetch_singularity.outputs.singularity_posts }}"
+          echo ""
+          echo "Merged: ${{ steps.merge_posts.outputs.merged_posts }}"
+          echo "Formatted: ${{ steps.format_posts.outputs.formatted_posts }}"
+          echo "OpenAI: ${{ steps.openai_process.outputs.openai_result }}"
+          echo "Code: ${{ steps.code_process.outputs.code_result }}"
+          echo "----------------------------------------"
+          echo "✅ Email sent successfully (dummy mode)"
